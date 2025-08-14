@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3"></div>
+<h1>User Update</h1>
+<br>
+
+<!--{% if form.errors %}
+<div class="alert alert-danger">
+
+    {% for field in form %}
+        {% for error in field.errors %}
+            {% if "already exists" in error or "already taken" in error %}
+                <p>⚠️ Bu kullanıcı adı veya e-posta zaten alınmış.</p>
+            {% else %}
+                <p><strong>{{ field.label }}:</strong> {{ error }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+    {% for error in form.non_field_errors %}
+        {% if "password is incorrect" in error %}
+            <p>🔐 Şifrenizi yanlış girdiniz. Lütfen tekrar deneyin.</p>
+        {% else %}
+            <p><strong>Hata:</strong> {{ error }}</p>
+        {% endif %}
+    {% endfor %}
+
+</div>
+{% endif %}-->
+
+
+
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    <br>
+    {{ profile_form.as_p }}
+    <br><br>
+    <button type="submit" class="btn btn-secondary">Update Profile</button>
+</form>
+
+</div>
+
+{% endblock %}

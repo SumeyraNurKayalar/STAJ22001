@@ -1,6 +1,15 @@
 
-from django.urls import path
+from django.urls import path, include
 from . import views
+from rest_framework import routers
+from .views import MeepViewSet, ProfileViewSet
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+
+router = routers.DefaultRouter()
+router.register(r'meeps', MeepViewSet)
+router.register(r"profiles", ProfileViewSet)
 
 urlpatterns = [
     path('', views.home, name="home"),
@@ -20,4 +29,11 @@ urlpatterns = [
     path('edit_meep/<int:pk>', views.edit_meep, name="edit_meep"), 
     path('search/', views.search, name='search'),
     path('search_user/', views.search_user, name='search_user'),
+    path("report/<int:pk>/", views.report_meep, name="report_meep"),
+    path('admin/', admin.site.urls),
+    
+    path('api/', include(router.urls)),
+
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

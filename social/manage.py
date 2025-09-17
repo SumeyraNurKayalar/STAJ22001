@@ -1,4 +1,6 @@
-#!/usr/bin/env python
+# this part is not used anymore but for future possibilities of using this part I will keep this part as a comment code
+
+<<!
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
@@ -20,3 +22,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+!>>

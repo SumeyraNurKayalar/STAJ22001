@@ -1,5 +1,5 @@
 from django import forms
-from .models import Meep, Profile
+from .models import Meep, Profile, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -59,3 +59,31 @@ class SignUpForm(UserCreationForm):
 		self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
 		self.fields['password2'].label = ''
 		self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
+
+#reports reasons are taken from here
+REPORT_REASONS = [
+    ("spam", "Spam or Fake"),
+    ("abuse", "Insult / Abuse / Racism / Sexism"),
+    ("misinfo", "Sharing Misinformation"),
+    ("other", "Other"),
+]
+
+class ReportForm(forms.Form):
+    reason = forms.ChoiceField(
+        choices=REPORT_REASONS,
+		#to use one reson to report
+        widget=forms.RadioSelect,
+        label="Report reason"
+    )
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']
+        widgets = {
+            'body': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Write your comment ',
+                'rows': 2
+            }),
+        }
